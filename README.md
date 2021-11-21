@@ -1,9 +1,9 @@
 # Quality LAC Data Reference - Postcodes
 
-This is a redistribution of the **ONS Postcode Directory** shaped 
+This is a redistribution of the **ONS Postcode Directory** shaped
 to be used in the Quality Lac Data project.
 
-This repository contains pypi and npm distributions of
+This repository contains PyPI and npm distributions of
 subsets of this dataset as well as the scripts to
 generate them from source.
 
