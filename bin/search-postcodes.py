@@ -1,8 +1,26 @@
+import argparse
+
 from qlacref_postcodes import Postcodes
 
-pc = Postcodes()
-pc.load_postcodes('SEB')
-print(pc.dataframe.shape[1])
 
-pc.load_postcodes('B')
-print(pc.dataframe.shape[1])
+def search_postcodes(postcodes):
+    pc = Postcodes()
+
+    postcodes = [p.upper() for p in postcodes]
+    letters = [p[0] for p in postcodes]
+
+    pc.load_postcodes(letters)
+    df = pc.dataframe
+
+    for pc in postcodes:
+        abbr_pc = pc.replace(' ', '')
+        print(df[df.pcd_abbr == abbr_pc])
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Search the postcode database")
+    parser.add_argument('postcodes', metavar='POSTCODE', type=str, nargs='+', help='Postcode(s) to search for')
+
+    args = parser.parse_args()
+
+    search_postcodes(args.postcodes)

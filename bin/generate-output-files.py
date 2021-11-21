@@ -1,20 +1,19 @@
 #!/usr/bin/env python
-import bz2
+import hashlib
 
 import pandas as pd
 import logging
 import re
-import sqlite3
 import sys
 
 from pathlib import Path
 from zipfile import ZipFile
 
-from qlacref_postcodes import columns
-
 logger = logging.getLogger(__name__)
 
 root_dir = Path(__file__).parent.parent
+
+columns = ['pcd', 'oseast1m', 'osnrth1m', 'laua']
 
 
 def main(input_file=None):
@@ -45,9 +44,15 @@ def main(input_file=None):
         del letter_codes['first_letter']
         print(f"Writing {letter_codes.shape[0]} entries for the letter {letter}.")
 
-        zip_filename = root_dir / f"qlacref_postcodes/postcodes_{letter}.json.bz2"
-        with bz2.open(zip_filename, 'wb', compresslevel=9) as bz_file:
-            letter_codes.to_json(bz_file, orient="records")
+        zip_filename = root_dir / f"qlacref_postcodes/postcodes_{letter}.pickle.gz"
+        letter_codes.to_pickle(zip_filename)
+
+
+    with open(root_dir / "qlacref_postcodes/hashes.txt", 'wt') as file:
+        file.writelines([f"{k}: {v}\n" for k, v in hashes.items()])
+
+        # zip_filename = root_dir / f"qlacref_postcodes/postcodes_{letter}.json.gz"
+        # letter_codes.to_json(zip_filename, orient="records")
 
 
 if __name__ == "__main__":

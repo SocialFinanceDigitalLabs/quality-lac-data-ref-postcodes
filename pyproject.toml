@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quality-lac-data-ref-postcodes"
-version = "2021.8-alpha.2"
+version = "2021.8-alpha.3"
 description = """\
 This is a redistribution of the ONS dataset on Lower Tier Local Authority to\
 Upper Tier Local Authority Lookup packaged for the Quality Lac Data project.\
@@ -11,6 +11,7 @@ authors = [
     "Office for National Statistics <sharedcustomercontactcentre@ons.gov.uk>",
     "Kaj Siebert <kaj@k-si.com>",
 ]
+repository = "https://github.com/SocialFinanceDigitalLabs/quality-lac-data-ref-postcodes"
 license = "OGL-UK-3.0"
 packages = [
     { include = "qlacref_postcodes" },
@@ -18,12 +19,12 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.7.1,<4.0"
-pandas = { version="^1.0.0", optional=true }
+rsa = "^4.7.2"
 
 [tool.poetry.dev-dependencies]
+pandas = "1.0.5" # Matches pyodide version for pickle compatibility
 
 [tool.poetry.extras]
-pandas = ["pandas"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
