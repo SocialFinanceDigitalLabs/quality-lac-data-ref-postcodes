@@ -1,14 +1,14 @@
-import bz2
 import hashlib
 import logging
 import os
-from typing import Iterable
+from typing import Iterable, Union
 
 import pandas as pd
 from pathlib import Path
 
 import rsa
 from rsa import VerificationError
+from rsa.key import PublicKey
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,12 @@ class Postcodes:
     _df = pd.DataFrame({c: pd.Series(dtype=t) for c, t in _dtypes.items()})
     __hashes = None
 
-    def __init__(self, pubkey=None):
+    def __init__(self, pubkey: PublicKey = None, data_dir: Union[Path, str] = None):
+        if data_dir is not None:
+            self._data_dir = Path(data_dir)
+        elif os.getenv('QLACREF_DATA_DIR') is not None:
+            self._data_dir = Path(os.environ['QLACREF_DATA_DIR'])
+
         if os.getenv('QLACREF_PC_INSECURE') == 'True':
             return
 
