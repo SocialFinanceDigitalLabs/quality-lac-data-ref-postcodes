@@ -44,5 +44,13 @@ Commit everything to GitHub. If ready to make a release, make sure to update the
 [GitHub Action](.github/workflows/python-publish.yml) will then create the distribution files and
 upload to [PyPI][pypi].
 
+Release naming should follow a pseudo-[semantic versioning][semver] format:
+`<YEAR>.<MONTH>.<PATCH>`. Alpha and beta releases can be flagged by appending 
+`-alpha.<number>` and `-beta.<number>`. 
+
+For example, the August 2021 release is named [2021.8][2021.8] with the associated tag [v2021.8][tag-v2021.8].
 
 [pypi]: https://pypi.org/project/quality-lac-data-ref-postcodes/
+[semver]: https://semver.org/
+[2021.8]: https://github.com/SocialFinanceDigitalLabs/quality-lac-data-ref-postcodes/releases/tag/v2021.8
+[tag-v2021.8]: https://github.com/SocialFinanceDigitalLabs/quality-lac-data-ref-postcodes/tree/v2021.8
