@@ -48,12 +48,5 @@ def main(input_file=None):
         letter_codes.to_pickle(zip_filename)
 
 
-    with open(root_dir / "qlacref_postcodes/hashes.txt", 'wt') as file:
-        file.writelines([f"{k}: {v}\n" for k, v in hashes.items()])
-
-        # zip_filename = root_dir / f"qlacref_postcodes/postcodes_{letter}.json.gz"
-        # letter_codes.to_json(zip_filename, orient="records")
-
-
 if __name__ == "__main__":
     main()

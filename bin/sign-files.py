@@ -1,3 +1,4 @@
+import argparse
 import hashlib
 from pathlib import Path
 
@@ -28,7 +29,11 @@ def main(privkey):
 
 
 if __name__ == "__main__":
-    with open('id_rsa', 'rb') as key:
+    parser = argparse.ArgumentParser(description='Create signed hashes for pickle files.')
+    parser.add_argument('private_key', metavar='FILE', type=str, help='The private key file')
+
+    args = parser.parse_args()
+    with open(args.private_key, 'rb') as key:
         privkey = rsa.PrivateKey.load_pkcs1(key.read())
 
     main(privkey)
