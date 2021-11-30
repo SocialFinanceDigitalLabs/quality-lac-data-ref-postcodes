@@ -25,3 +25,24 @@ When downloading from PyPI, specify the environment variable
 `QLACREF_PC_KEY` to either be the public key itself, or a path
 to where it can be loaded from. The checksums are then verified
 and each file checked before unpickling. 
+
+## Regular updates
+
+When a new postcode distribution is available, download it and add it to the source folder and
+at the same time delete the existing file from this location. There can only be one file
+in the source folder at a time.
+
+After updating the postcode sources, run the script found in `bin/generate-output-files.py` to 
+regenerate the output files for each letter of the alphabet. These end up in the 
+qlacref_postcodes directory.
+
+To sign the postcodes, you need the distribution private key. Run the script `bin/sign-files.py` to
+create the signed checksum file. 
+
+Commit everything to GitHub. If ready to make a release, make sure to update the version in 
+[pyproject.toml](./pyproject.toml), push to GitHub and then create a GitHub release. The 
+[GitHub Action](.github/workflows/python-publish.yml) will then create the distribution files and
+upload to [PyPI][pypi].
+
+
+[pypi]: https://pypi.org/project/quality-lac-data-ref-postcodes/
