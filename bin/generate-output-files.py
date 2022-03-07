@@ -44,8 +44,8 @@ def main(input_file=None):
         del letter_codes['first_letter']
         print(f"Writing {letter_codes.shape[0]} entries for the letter {letter}.")
 
-        zip_filename = root_dir / f"qlacref_postcodes/postcodes_{letter}.pickle.gz"
-        letter_codes.to_pickle(zip_filename)
+        zip_filename = root_dir / f"qlacref_postcodes/postcodes_{letter}.parquet.gz"
+        letter_codes.to_parquet(zip_filename)
 
 
 if __name__ == "__main__":
