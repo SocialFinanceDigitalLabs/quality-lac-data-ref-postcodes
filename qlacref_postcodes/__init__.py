@@ -65,9 +65,9 @@ class Postcodes:
         self.__hashes = {n: h for h, n in [w.split(' ') for w in file_data if len(w) > 0]}
 
     def _get_filename(self, letter):
-        return self._data_dir / f"postcodes_{letter}.pickle.gz"
+        return self._data_dir / f"postcodes_{letter}.parquet.gz"
 
-    def _read_pickle(self, letter):
+    def _read_parquet(self, letter):
         filename = self._get_filename(letter)
         logger.debug(f"Opening {filename}")
         if self.__hashes is not None:
@@ -75,7 +75,7 @@ class Postcodes:
                 hash = hashlib.sha512(file.read()).hexdigest()
                 if hash != self.__hashes[filename.name]:
                     raise VerificationError(f"Incorrect hash for {filename}")
-        return pd.read_pickle(filename)
+        return pd.read_parquet(filename)
 
     @property
     def dataframe(self):
@@ -91,7 +91,7 @@ class Postcodes:
             if letter in self._read:
                 continue
             try:
-                df = self._read_pickle(letter)
+                df = self._read_parquet(letter)
                 logger.debug(f"Read {df.shape[0]} postcodes from {letter}")
                 dataframes.append(df)
             except (ValueError, FileNotFoundError):

@@ -23,7 +23,7 @@ python = ">=3.7.1,<4.0"
 rsa = ">=4.7"
 
 [tool.poetry.dev-dependencies]
-pandas = "1.0.5" # Matches pyodide version for pickle compatibility
+pandas = "1.0.5" 
 
 [tool.poetry.extras]
 
